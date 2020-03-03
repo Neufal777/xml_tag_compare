@@ -4,6 +4,7 @@ import (
 	"encoding/xml"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"strings"
 )
 
@@ -27,7 +28,7 @@ func main() {
 
 		ad := &Ad{}
 
-		_ = xml.Unmarshal([]byte(data), &ad)
+		xml.Unmarshal(data, &ad)
 
 		urls = append(urls, ad.Url+"&"+file)
 
@@ -36,9 +37,9 @@ func main() {
 	//print slice of ALL oobtained ulrs
 	fmt.Println(urls)
 
-	urlsList1 := []string{"url1"}
-	urlsList2 := []string{"url2"}
-	urlsList3 := []string{"url3"}
+	urlsList1 := []string{}
+	urlsList2 := []string{}
+	urlsList3 := []string{}
 
 	for _, url := range urls {
 
@@ -56,4 +57,7 @@ func main() {
 		}
 	}
 
+	log.Println("lista1: ", urlsList1)
+	log.Println("Lista2: ", urlsList2)
+	log.Println("Lista3: ", urlsList3)
 }
