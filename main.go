@@ -1,23 +1,54 @@
 package main
 
 import (
+	"bytes"
 	"encoding/xml"
 	"fmt"
 	"io/ioutil"
-	"log"
-	"strings"
 )
+
+type Item struct {
+	Item []Ad `xml:"ad"`
+}
 
 type Ad struct {
 	Url string `xml:"url"`
 }
 
+func UrlsCompare(urlSlice []string) {
+
+	/*Comparar las urls de los distintos enlaces
+	y obtener enlaces duplicados entre los archivos*/
+
+	total := map[string]int{}
+
+	for _, urls := range urlSlice {
+
+		if total[urls] > 0 {
+			total[urls] += 1
+
+		} else {
+
+			total[urls] = 1
+		}
+	}
+
+	for url, veces := range total {
+
+		if veces > 1 {
+
+			fmt.Println("La url:", url, "esta repetida", veces, "veces")
+		}
+	}
+}
+
 func main() {
 
 	files := []string{
-		"file1.xml",
-		"file2.xml",
-		"file3.xml",
+		//"jobs_165.xml",
+		//"jobs_7459.xml",
+		//"jobs_8218.xml",
+		//"jobs_8957.xml",
 	}
 
 	urls := []string{}
@@ -29,35 +60,28 @@ func main() {
 		ad := &Ad{}
 
 		xml.Unmarshal(data, &ad)
+		r := bytes.NewReader(data)
 
-		urls = append(urls, ad.Url+"&"+file)
+		var inElement string
 
-	}
-
-	//print slice of ALL oobtained ulrs
-	fmt.Println(urls)
-
-	urlsList1 := []string{}
-	urlsList2 := []string{}
-	urlsList3 := []string{}
-
-	for _, url := range urls {
-
-		contiene1 := strings.Contains(url, "&file1.xml")
-		contiene2 := strings.Contains(url, "&file2.xml")
-		contiene3 := strings.Contains(url, "&file3.xml")
-
-		if contiene1 == true {
-			urlsList1 = append(urlsList1, url)
-		} else if contiene2 == true {
-			urlsList2 = append(urlsList2, url)
-		} else if contiene3 == true {
-			urlsList3 = append(urlsList3, url)
-
+		decoder := xml.NewDecoder(r)
+		for {
+			t, _ := decoder.Token()
+			if t == nil {
+				break
+			}
+			switch se := t.(type) {
+			case xml.StartElement:
+				inElement = se.Name.Local
+				if inElement == "ad" {
+					decoder.DecodeElement(&ad, &se)
+					urls = append(urls, ad.Url)
+				}
+			default:
+			}
 		}
+
 	}
 
-	log.Println("lista1: ", urlsList1)
-	log.Println("Lista2: ", urlsList2)
-	log.Println("Lista3: ", urlsList3)
+	UrlsCompare(urls)
 }
