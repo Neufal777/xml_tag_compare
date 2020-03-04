@@ -8,7 +8,8 @@ import (
 )
 
 type Ad struct {
-	Url string `xml:"url"`
+	Url     string `xml:"url"`
+	Content string `xml:"content"`
 }
 
 func filesProcess(files []string, adTag string) []string {
@@ -18,6 +19,7 @@ func filesProcess(files []string, adTag string) []string {
 		para procesarlas mas tarde y encontrar coincidencias.
 	*/
 	urls := []string{}
+	contents := []string{}
 
 	for _, file := range files {
 
@@ -42,13 +44,13 @@ func filesProcess(files []string, adTag string) []string {
 				if inElement == adTag {
 					decoder.DecodeElement(&ad, &se)
 					urls = append(urls, ad.Url)
+					contents = append(contents, ad.Content)
 				}
 			default:
 			}
 		}
 
 	}
-
 	return urls
 }
 
