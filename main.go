@@ -18,20 +18,19 @@ func filesProcess(files []string, adTag string) []string {
 		Analizamos los archivos y obtenemos las urls del tag <url>
 		para procesarlas mas tarde y encontrar coincidencias.
 	*/
+
 	urls := []string{}
 	contents := []string{}
 
 	for _, file := range files {
 
 		data, _ := ioutil.ReadFile(file)
-
 		ad := &Ad{}
-
 		xml.Unmarshal(data, &ad)
+
 		r := bytes.NewReader(data)
 
 		var inElement string
-
 		decoder := xml.NewDecoder(r)
 		for {
 			t, _ := decoder.Token()
@@ -49,7 +48,6 @@ func filesProcess(files []string, adTag string) []string {
 			default:
 			}
 		}
-
 	}
 	return urls
 }
@@ -75,9 +73,7 @@ func UrlsCompare(urlSlice []string) {
 	var sumaTotal int
 
 	for url, veces := range total {
-
 		if veces > 1 {
-
 			fmt.Println("La url:", url, "esta repetida", veces, "veces")
 			sumaTotal += veces
 
