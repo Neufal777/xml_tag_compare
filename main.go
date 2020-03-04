@@ -7,50 +7,16 @@ import (
 	"io/ioutil"
 )
 
-type Item struct {
-	Item []Ad `xml:"ad"`
-}
-
 type Ad struct {
 	Url string `xml:"url"`
 }
 
-func UrlsCompare(urlSlice []string) {
+func filesProcess(files []string, adTag string) []string {
 
-	/*Comparar las urls de los distintos enlaces
-	y obtener enlaces duplicados entre los archivos*/
-
-	total := map[string]int{}
-
-	for _, urls := range urlSlice {
-
-		if total[urls] > 0 {
-			total[urls] += 1
-
-		} else {
-
-			total[urls] = 1
-		}
-	}
-
-	for url, veces := range total {
-
-		if veces > 1 {
-
-			fmt.Println("La url:", url, "esta repetida", veces, "veces")
-		}
-	}
-}
-
-func main() {
-
-	files := []string{
-		//"jobs_165.xml",
-		//"jobs_7459.xml",
-		//"jobs_8218.xml",
-		//"jobs_8957.xml",
-	}
-
+	/*
+		Analizamos los archivos y obtenemos las urls del tag <url>
+		para procesarlas mas tarde y encontrar coincidencias.
+	*/
 	urls := []string{}
 
 	for _, file := range files {
@@ -73,7 +39,7 @@ func main() {
 			switch se := t.(type) {
 			case xml.StartElement:
 				inElement = se.Name.Local
-				if inElement == "ad" {
+				if inElement == adTag {
 					decoder.DecodeElement(&ad, &se)
 					urls = append(urls, ad.Url)
 				}
@@ -83,5 +49,51 @@ func main() {
 
 	}
 
-	UrlsCompare(urls)
+	return urls
+}
+
+func UrlsCompare(urlSlice []string) {
+
+	/*
+		Comparar las urls de los distintos enlaces
+		y obtener enlaces duplicados entre los archivos
+	*/
+
+	total := map[string]int{}
+
+	for _, urls := range urlSlice {
+
+		if total[urls] > 0 {
+			total[urls] += 1
+
+		} else {
+
+			total[urls] = 1
+		}
+	}
+
+	sumaTotal := 0
+	for url, veces := range total {
+
+		if veces > 1 {
+
+			fmt.Println("La url:", url, "esta repetida", veces, "veces")
+			sumaTotal += veces
+
+		}
+	}
+
+	fmt.Println("Hay ", sumaTotal, "Duplicados en total")
+}
+
+func main() {
+
+	files := []string{
+		//"file1.xml",
+		//"file2.xml",
+		//"file3.xml",
+		//"file4.xml",
+	}
+
+	UrlsCompare(filesProcess(files, "ad"))
 }
