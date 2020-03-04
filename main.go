@@ -67,14 +67,13 @@ func UrlsCompare(urlSlice []string) {
 
 		if total[urls] > 0 {
 			total[urls] += 1
-
 		} else {
-
 			total[urls] = 1
 		}
 	}
 
-	sumaTotal := 0
+	var sumaTotal int
+
 	for url, veces := range total {
 
 		if veces > 1 {
@@ -85,7 +84,7 @@ func UrlsCompare(urlSlice []string) {
 		}
 	}
 
-	fmt.Println("Hay ", sumaTotal, "Duplicados en total")
+	fmt.Println("Total Duplicados:", sumaTotal)
 }
 
 func main() {
@@ -93,8 +92,6 @@ func main() {
 	files := []string{
 		"file1.xml",
 		"file2.xml",
-		//"file3.xml",
-		//"file4.xml",
 	}
 
 	UrlsCompare(filesProcess(files, "ad"))
