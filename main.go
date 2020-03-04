@@ -49,7 +49,6 @@ func filesProcess(files []string, adTag string) []string {
 			default:
 			}
 		}
-
 	}
 	return urls
 }
