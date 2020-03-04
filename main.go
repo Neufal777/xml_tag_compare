@@ -89,8 +89,8 @@ func UrlsCompare(urlSlice []string) {
 func main() {
 
 	files := []string{
-		//"file1.xml",
-		//"file2.xml",
+		"file1.xml",
+		"file2.xml",
 		//"file3.xml",
 		//"file4.xml",
 	}
