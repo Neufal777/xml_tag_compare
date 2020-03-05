@@ -5,11 +5,12 @@ import (
 	"encoding/xml"
 	"fmt"
 	"io/ioutil"
+	"log"
+	"time"
 )
 
 type Ad struct {
-	Url     string `xml:"url"`
-	Content string `xml:"content"`
+	Url string `xml:"url"`
 }
 
 func filesProcess(files []string, adTag string) []string {
@@ -20,7 +21,6 @@ func filesProcess(files []string, adTag string) []string {
 	*/
 
 	urls := []string{}
-	contents := []string{}
 
 	for _, file := range files {
 
@@ -43,7 +43,6 @@ func filesProcess(files []string, adTag string) []string {
 				if inElement == adTag {
 					decoder.DecodeElement(&ad, &se)
 					urls = append(urls, ad.Url)
-					contents = append(contents, ad.Content)
 				}
 			default:
 			}
@@ -85,10 +84,17 @@ func UrlsCompare(urlSlice []string) {
 
 func main() {
 
+	start := time.Now()
+
 	files := []string{
 		"file1.xml",
-		"file2.xml",
+		//"file2.xml",
+		//"file3.xml",
 	}
 
 	UrlsCompare(filesProcess(files, "ad"))
+
+	elapsed := time.Since(start)
+	log.Println("Exec Time", elapsed)
+
 }
