@@ -43,13 +43,9 @@ func (a *Ad) filesProcess(files []string, adTag string) []string {
 				inElement = se.Name.Local
 				if inElement == adTag {
 					decoder.DecodeElement(&a, &se)
-
-					//Tag values we get
 					urls = append(urls, a.URL)
-
 					adsprocessed++
 				}
-			default:
 			}
 		}
 	}
@@ -62,11 +58,9 @@ func (a *Ad) filesProcess(files []string, adTag string) []string {
 func (a *Ad) tagCompare(tagList []string) {
 
 	/*
-
 		We make the comparison of the tag list
-		to find matches
-
-		in the parameters you pass any type of list to make the comparison
+		to find matches in the parameters you pass
+		any type of list to make the comparison
 	*/
 
 	total := map[string]int{}
