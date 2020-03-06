@@ -28,6 +28,3 @@ https://www.EXAMPLE.com/ITEM/5657/5 Duplicated 3 Times<br/>
 Total duplicates 8
 
 2020/03/06 12:51:36 Exec Time 0.07s
-
-## License
-[MIT](https://choosealicense.com/licenses/mit/)
