@@ -59,7 +59,7 @@ func (a *Ad) filesProcess(files []string, adTag string) []string {
 }
 
 //TagCompare func description
-func (a *Ad) TagCompare(tagList []string) {
+func (a *Ad) tagCompare(tagList []string) {
 
 	/*
 
