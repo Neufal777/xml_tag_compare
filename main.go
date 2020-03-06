@@ -17,7 +17,7 @@ func main() {
 
 	var urls []string = ad.filesProcess(files, "ad")
 
-	ad.TagCompare(urls)
+	ad.tagCompare(urls)
 
 	elapsed := time.Since(start)
 	log.Println("Exec Time", elapsed)
