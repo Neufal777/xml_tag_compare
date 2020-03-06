@@ -7,9 +7,10 @@ import (
 	"io/ioutil"
 )
 
+//Ad type description //TODO
 type Ad struct {
-	Url   string `xml:"url"`
-	Id    int    `xml:"id"`
+	URL   string `xml:"url"`
+	ID    int    `xml:"id"`
 	Title string `xml:"title"`
 }
 
@@ -47,10 +48,10 @@ func (a *Ad) filesProcess(files []string, adTag string) ([]string, []string) {
 					decoder.DecodeElement(&a, &se)
 
 					//Tag values we get
-					urls = append(urls, a.Url)
+					urls = append(urls, a.URL)
 					titles = append(titles, a.Title)
 
-					adsprocessed += 1
+					adsprocessed++
 				}
 			default:
 			}
@@ -61,6 +62,7 @@ func (a *Ad) filesProcess(files []string, adTag string) ([]string, []string) {
 	return urls, titles
 }
 
+//TagCompare func description //TODO
 func (a *Ad) TagCompare(tagList []string) {
 
 	/*
@@ -76,7 +78,7 @@ func (a *Ad) TagCompare(tagList []string) {
 	for _, tag := range tagList {
 
 		if total[tag] > 0 {
-			total[tag] += 1
+			total[tag]++
 		} else {
 			total[tag] = 1
 		}
