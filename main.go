@@ -11,11 +11,11 @@ func main() {
 
 	ad := &Ad{}
 	files := []string{
-		//"file1.xml",
+		"file1.xml",
 		"file2.xml",
 	}
 
-	var urls, _ []string = ad.filesProcess(files, "ad")
+	var urls []string = ad.filesProcess(files, "ad")
 
 	ad.TagCompare(urls)
 

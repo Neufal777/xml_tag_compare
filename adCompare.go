@@ -7,22 +7,19 @@ import (
 	"io/ioutil"
 )
 
-//Ad type description //TODO
+//Ad type description
 type Ad struct {
-	URL   string `xml:"url"`
-	ID    int    `xml:"id"`
-	Title string `xml:"title"`
+	URL string `xml:"url"`
 }
 
-func (a *Ad) filesProcess(files []string, adTag string) ([]string, []string) {
+func (a *Ad) filesProcess(files []string, adTag string) []string {
 
 	/*
-		Analizamos los archivos y obtenemos los tags
-		para procesarlas mas tarde y encontrar coincidencias.
+		We analyze the files and get the tags
+		to process them later and find matches.
 	*/
 
 	var urls = []string{}
-	var titles = []string{}
 
 	adsprocessed := 0
 
@@ -49,7 +46,6 @@ func (a *Ad) filesProcess(files []string, adTag string) ([]string, []string) {
 
 					//Tag values we get
 					urls = append(urls, a.URL)
-					titles = append(titles, a.Title)
 
 					adsprocessed++
 				}
@@ -59,21 +55,22 @@ func (a *Ad) filesProcess(files []string, adTag string) ([]string, []string) {
 	}
 
 	fmt.Println("Ads processed", adsprocessed)
-	return urls, titles
+	return urls
 }
 
-//TagCompare func description //TODO
+//TagCompare func description
 func (a *Ad) TagCompare(tagList []string) {
 
 	/*
-		Hacemos la comparacion de la lista de tags
-		para encontrar coincidencias
 
-		en los parámetros se le pasa cualquier tipo de lista para hacer la comparacion
+		We make the comparison of the tag list
+		to find matches
+
+		in the parameters you pass any type of list to make the comparison
 	*/
 
 	total := map[string]int{}
-	var sumaTotal int
+	var totalSum int
 
 	for _, tag := range tagList {
 
@@ -88,11 +85,11 @@ func (a *Ad) TagCompare(tagList []string) {
 
 		if veces > 1 {
 
-			fmt.Println(tag, "Duplicado", veces, "veces")
-			sumaTotal += veces
+			fmt.Println(tag, "Duplicated", veces, "Times")
+			totalSum += veces
 		}
 	}
 
-	fmt.Println("Total duplicados", sumaTotal)
+	fmt.Println("Total duplicates", totalSum)
 
 }
