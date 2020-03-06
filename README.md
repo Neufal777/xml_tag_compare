@@ -19,9 +19,9 @@ files := []string{
 
 Ads processed 10 
 
-https://www.EXAMPLE.com/ITEM/8415/3 Duplicated 3 Times
-https://www.EXAMPLE.com/ITEM/87565/8 Duplicated 2 Times
-https://www.EXAMPLE.com/ITEM/5657/5 Duplicated 3 Times
+https://www.EXAMPLE.com/ITEM/8415/3 Duplicated 3 Times<br/>
+https://www.EXAMPLE.com/ITEM/87565/8 Duplicated 2 Times<br/>
+https://www.EXAMPLE.com/ITEM/5657/5 Duplicated 3 Times<br/>
 
 Total duplicates 8
 
