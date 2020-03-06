@@ -13,14 +13,11 @@ func main() {
 	files := []string{
 		//"file1.xml",
 		"file2.xml",
-		//"file3.xml",
-		//etc..
 	}
 
-	var urls, titles []string = ad.filesProcess(files, "ad")
+	var urls, _ []string = ad.filesProcess(files, "ad")
 
 	ad.TagCompare(urls)
-	ad.TagCompare(titles)
 
 	elapsed := time.Since(start)
 	log.Println("Exec Time", elapsed)

@@ -16,7 +16,7 @@ type Ad struct {
 func (a *Ad) filesProcess(files []string, adTag string) ([]string, []string) {
 
 	/*
-		Analizamos los archivos y obtenemos las urls del tag <url>
+		Analizamos los archivos y obtenemos los tags
 		para procesarlas mas tarde y encontrar coincidencias.
 	*/
 
@@ -62,6 +62,13 @@ func (a *Ad) filesProcess(files []string, adTag string) ([]string, []string) {
 }
 
 func (a *Ad) TagCompare(tagList []string) {
+
+	/*
+		Hacemos la comparacion de la lista de tags
+		para encontrar coincidencias
+
+		en los parámetros se le pasa cualquier tipo de lista para hacer la comparacion
+	*/
 
 	total := map[string]int{}
 	var sumaTotal int
