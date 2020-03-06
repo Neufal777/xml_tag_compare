@@ -9,7 +9,7 @@ files := []string{
 	"file2.xml",
     "etc...",
 }
-	var urls, _ []string = ad.filesProcess(files, ITEM_CONTAINER_TAG_NAME)
+	var urls, _ []string = ad.filesProcess(files, ITEM_CONTAINER_URL_TAG_NAME)
 
     //Function to check duplicates
 	ad.TagCompare(urls)
