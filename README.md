@@ -4,11 +4,13 @@
 
 ```golang
 ad := &Ad{}
+
 files := []string{
 		"file1.xml",
 		"file2.xml",
     		"etc...",
-}
+		}
+		
 	var urls, _ []string = ad.filesProcess(files, ITEM_CONTAINER_URL_TAG_NAME) //example: <ad> "ad"
 
 	//Function to check duplicates
