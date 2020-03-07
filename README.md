@@ -1,4 +1,4 @@
-# Xml Tag Check Duplicates
+# Tag Check Duplicates (XML)
 
 ## Usage
 
