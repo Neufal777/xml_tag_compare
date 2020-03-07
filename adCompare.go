@@ -12,16 +12,19 @@ type Ad struct {
 	URL string `xml:"url"`
 }
 
-func (a *Ad) filesProcess(files []string, adTag string) []string {
+func (a *Ad) filesProcess(files []string, adTag string) {
 
 	/*
 		We analyze the files and get the tags
 		to process them later and find matches.
 	*/
+	fmt.Println("Processing..")
 
 	var urls = []string{}
-
-	adsprocessed := 0
+	total := map[string]int{}
+	var totalSum int
+	var urlprocessed int = 0
+	var inElement string
 
 	for _, file := range files {
 
@@ -31,7 +34,6 @@ func (a *Ad) filesProcess(files []string, adTag string) []string {
 
 		r := bytes.NewReader(data)
 
-		var inElement string
 		decoder := xml.NewDecoder(r)
 		for {
 			t, _ := decoder.Token()
@@ -44,29 +46,16 @@ func (a *Ad) filesProcess(files []string, adTag string) []string {
 				if inElement == adTag {
 					decoder.DecodeElement(&a, &se)
 					urls = append(urls, a.URL)
-					adsprocessed++
+					urlprocessed++
 				}
 			}
 		}
 	}
+	fmt.Println("url processed", urlprocessed)
+	fmt.Println("Comparing Urls...")
 
-	fmt.Println("Ads processed", adsprocessed)
-	return urls
-}
-
-//TagCompare func description
-func (a *Ad) tagCompare(tagList []string) {
-
-	/*
-		We make the comparison of the tag list
-		to find matches in the parameters you pass
-		any type of list to make the comparison
-	*/
-
-	total := map[string]int{}
-	var totalSum int
-
-	for _, tag := range tagList {
+	//check if the URL's are duplicated
+	for _, tag := range urls {
 
 		if total[tag] > 0 {
 			total[tag]++
@@ -76,9 +65,7 @@ func (a *Ad) tagCompare(tagList []string) {
 	}
 
 	for tag, veces := range total {
-
 		if veces > 1 {
-
 			fmt.Println(tag, "Duplicated", veces, "Times")
 			totalSum += veces
 		}
