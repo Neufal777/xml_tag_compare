@@ -14,16 +14,12 @@ func main() {
 
 	files := []string{
 		"file1.xml",
-		//you can add as many as you want
-	}
-
-	files2 := []string{
 		"file2.xml",
 		//you can add as many as you want
 	}
+
 	//process files
-	go ad.filesProcess(files, "ad")
-	go ad.filesProcess(files2, "ad")
+	ad.filesProcess(files, "ad")
 
 	//calculate exec time
 	elapsed := time.Since(start)
