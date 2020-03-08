@@ -21,6 +21,7 @@ func main() {
 		"file2.xml",
 		//you can add as many as you want
 	}
+
 	//process files
 	go ad.filesProcess(files, "ad")
 	go ad.filesProcess(files2, "ad")
