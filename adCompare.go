@@ -75,12 +75,12 @@ func (a *Ad) tagCompare(tagList []string) {
 		}
 	}
 
-	for tag, veces := range total {
+	for tag, times := range total {
 
-		if veces > 1 {
+		if times > 1 {
 
-			fmt.Println(tag, "Duplicated", veces, "Times")
-			totalSum += veces
+			fmt.Println(tag, "Duplicated", times, "Times")
+			totalSum += times
 		}
 	}
 
