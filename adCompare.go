@@ -12,19 +12,23 @@ type Ad struct {
 	URL string `xml:"url"`
 }
 
-func (a *Ad) filesProcess(files []string, adTag string) {
+func (a *Ad) filesProcess(files []string, adTag string) map[string]int {
 
 	/*
 		We analyze the files and get the tags
 		to process them later and find matches.
 	*/
+
+	//Show processing message
 	fmt.Println("Processing..")
 
-	var urls = []string{}
-	total := map[string]int{}
-	var totalSum int
-	var urlprocessed int = 0
-	var inElement string
+	totalUrls := map[string]int{}
+
+	var (
+		urlprocessed int
+		inElement    string
+		urls         []string
+	)
 
 	for _, file := range files {
 
@@ -35,11 +39,13 @@ func (a *Ad) filesProcess(files []string, adTag string) {
 		r := bytes.NewReader(data)
 
 		decoder := xml.NewDecoder(r)
+
 		for {
 			t, _ := decoder.Token()
 			if t == nil {
 				break
 			}
+
 			switch se := t.(type) {
 			case xml.StartElement:
 				inElement = se.Name.Local
@@ -52,25 +58,31 @@ func (a *Ad) filesProcess(files []string, adTag string) {
 		}
 	}
 	fmt.Println("url processed", urlprocessed)
-	fmt.Println("Comparing Urls...")
 
 	//check if the URL's are duplicated
-	for _, tag := range urls {
+	for _, tagUrl := range urls {
 
-		if total[tag] > 0 {
-			total[tag]++
+		if totalUrls[tagUrl] > 0 {
+			totalUrls[tagUrl]++
 		} else {
-			total[tag] = 1
+			totalUrls[tagUrl] = 1
 		}
 	}
 
-	for tag, veces := range total {
-		if veces > 1 {
-			fmt.Println(tag, "Duplicated", veces, "Times")
-			totalSum += veces
-		}
-	}
-
-	fmt.Println("Total duplicates", totalSum)
-
+	return totalUrls
 }
+
+func (a *Ad) showDuplicates(tagmap map[string]int) {
+
+	var sumTotalDup int
+	for tag, times := range tagmap {
+		if times > 1 {
+			fmt.Println(tag, "Duplicated", times, "Times")
+			sumTotalDup += times
+		}
+	}
+
+	fmt.Println("Total duplicates: ", sumTotalDup)
+}
+
+//func (a *Ad) formatUrl(urls []string) []string {}
