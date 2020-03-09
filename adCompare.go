@@ -18,13 +18,14 @@ func (a *Ad) filesProcess(files []string, adTag string) {
 		We analyze the files and get the tags
 		to process them later and find matches.
 	*/
-	fmt.Println("Processing..")
+	totalUrls := map[string]int{}
 
-	var urls = []string{}
-	total := map[string]int{}
-	var totalSum int
-	var urlprocessed int = 0
-	var inElement string
+	var (
+		urlprocessed int
+		inElement    string
+		urls         []string
+		totalSum     int
+	)
 
 	for _, file := range files {
 
@@ -57,14 +58,14 @@ func (a *Ad) filesProcess(files []string, adTag string) {
 	//check if the URL's are duplicated
 	for _, tag := range urls {
 
-		if total[tag] > 0 {
-			total[tag]++
+		if totalUrls[tag] > 0 {
+			totalUrls[tag]++
 		} else {
-			total[tag] = 1
+			totalUrls[tag] = 1
 		}
 	}
 
-	for tag, veces := range total {
+	for tag, veces := range totalUrls {
 		if veces > 1 {
 			fmt.Println(tag, "Duplicated", veces, "Times")
 			totalSum += veces
