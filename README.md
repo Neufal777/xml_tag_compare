@@ -1,30 +1,33 @@
-# Xml Tag Check Duplicates
+# Tag Check Duplicates (XML)
 
 ## Usage
 
 ```golang
+
 ad := &Ad{}
 
 files := []string{
 	"file1.xml",
 	"file2.xml",
-	"etc...",
-	}
-		
-	var urls, _ []string = ad.filesProcess(files, ITEM_CONTAINER_URL_TAG_NAME) //example: <ad> "ad"
+}
 
-	//Function to check duplicates
-	ad.tagCompare(urls)
-```
+ad.filesProcess(files, ITEM_CONTAINER_URL_TAG_NAME) //example: <ad> "ad"
+
+``` 
 
 ## Output
 
-Ads processed 10 
+```sh
+Processing..
 
-https://www.EXAMPLE.com/ITEM/8415/3 Duplicated 3 Times<br/>
-https://www.EXAMPLE.com/ITEM/87565/8 Duplicated 2 Times<br/>
-https://www.EXAMPLE.com/ITEM/5657/5 Duplicated 3 Times<br/>
+url processed 20971
 
-Total duplicates 8
+Comparing Urls...
 
-2020/03/06 12:51:36 Exec Time 0.07s
+https://www.URL.COM.com/15987565/508 Duplicated 15 Times
+https://www.URL.OM.com/8415987565/43 Duplicated 12 Times
+https://www.URL.COM.com/8415987565/98 Duplicated 8 Times
+
+Total duplicates 35
+2020/03/07 13:00:26 Exec Time 1.269446349s
+```
