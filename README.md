@@ -1,4 +1,4 @@
-# Tag Check Duplicates (XML)
+# Tag Check Duplicates [XML]
 
 ## Usage
 
@@ -8,10 +8,15 @@ ad := &Ad{}
 
 files := []string{
 	"file1.xml",
-	"file2.xml",
+	//you can add as many as you want
 }
 
-ad.filesProcess(files, ITEM_CONTAINER_URL_TAG_NAME) //example: <ad> "ad"
+//process files & get the map[string]int with all the duplicates
+res := ad.filesProcess(files, "ad")
+dups := ad.checkDuplicates(res)
+
+//print all duplicates
+ad.showDuplicates(dups)
 
 ``` 
 
