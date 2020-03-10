@@ -15,15 +15,15 @@ func main() {
 	files := []string{
 		"file1.xml",
 		//"file2.xml",
-		//"file3.xml",
 		//you can add as many as you want
 	}
 
 	//process files & get the map[string]int with all the duplicates
 	res := ad.filesProcess(files, "ad")
+	dups := ad.checkDuplicates(res)
 
-	//show results
-	ad.showDuplicates(res)
+	//print all duplicates
+	ad.showDuplicates(dups)
 
 	//calculate exec time
 	elapsed := time.Since(start)

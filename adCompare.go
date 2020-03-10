@@ -12,7 +12,7 @@ type Ad struct {
 	URL string `xml:"url"`
 }
 
-func (a *Ad) filesProcess(files []string, adTag string) map[string]int {
+func (a *Ad) filesProcess(files []string, adTag string) []string {
 
 	/*
 		We analyze the files and get the tags
@@ -21,8 +21,6 @@ func (a *Ad) filesProcess(files []string, adTag string) map[string]int {
 
 	//Show processing message
 	fmt.Println("Processing..")
-
-	totalUrls := map[string]int{}
 
 	var (
 		urlprocessed int
@@ -59,8 +57,17 @@ func (a *Ad) filesProcess(files []string, adTag string) map[string]int {
 	}
 	fmt.Println("url processed", urlprocessed)
 
-	//check if the URL's are duplicated
-	for _, tagUrl := range urls {
+	//return slice with all url dups
+	return urls
+
+}
+
+func (a *Ad) checkDuplicates(allUrls []string) map[string]int {
+
+	totalUrls := map[string]int{}
+
+	//check duplicates in slice return map with all the dups
+	for _, tagUrl := range allUrls {
 
 		if totalUrls[tagUrl] > 0 {
 			totalUrls[tagUrl]++
@@ -70,11 +77,15 @@ func (a *Ad) filesProcess(files []string, adTag string) map[string]int {
 	}
 
 	return totalUrls
+
 }
 
 func (a *Ad) showDuplicates(tagmap map[string]int) {
 
-	var sumTotalDup int
+	var (
+		sumTotalDup int
+	)
+
 	for tag, times := range tagmap {
 		if times > 1 {
 			fmt.Println(tag, "Duplicated", times, "Times")
@@ -84,5 +95,3 @@ func (a *Ad) showDuplicates(tagmap map[string]int) {
 
 	fmt.Println("Total duplicates: ", sumTotalDup)
 }
-
-//func (a *Ad) formatUrl(urls []string) []string {}
