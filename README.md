@@ -4,10 +4,10 @@
 
 ```golang
 
-ad := &Ad{}
 
 files := []string{
 	"file1.xml",
+	"file2.xml",
 	//you can add as many as you want
 }
 
