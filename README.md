@@ -1,4 +1,4 @@
-# Tag Check Duplicates (XML)
+# Tag Check Duplicates [XML]
 
 ## Usage
 
@@ -8,11 +8,11 @@ ad := &Ad{}
 
 files := []string{
 	"file1.xml",
-	"file2.xml",
+	//you can add as many as you want
 }
 
 	//process files & get the map[string]int with all the duplicates
-	res := domain.FilesProcess(files, "ad")
+	res := domain.FilesProcess(files, "ITEM_TAG_NAME")
 	dups := domain.CheckDuplicates(res)
 
 	//print all duplicates
