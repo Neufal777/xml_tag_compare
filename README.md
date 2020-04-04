@@ -11,12 +11,12 @@ files := []string{
 	//you can add as many as you want
 }
 
-//process files & get the map[string]int with all the duplicates
-res := ad.filesProcess(files, "ad")
-dups := ad.checkDuplicates(res)
+	//process files & get the map[string]int with all the duplicates
+	res := domain.FilesProcess(files, "ITEM_TAG_NAME")
+	dups := domain.CheckDuplicates(res)
 
-//print all duplicates
-ad.showDuplicates(dups)
+	//print all duplicates
+	domain.ShowDuplicates(dups)
 
 ``` 
 

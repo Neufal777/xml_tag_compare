@@ -1,4 +1,4 @@
-package main
+package domain
 
 import (
 	"bytes"
@@ -12,13 +12,14 @@ type Ad struct {
 	URL string `xml:"url"`
 }
 
-func (a *Ad) filesProcess(files []string, adTag string) []string {
+func FilesProcess(files []string, adTag string) []string {
 
 	/*
 		We analyze the files and get the tags
 		to process them later and find matches.
 	*/
 
+	a := &Ad{}
 	//Show processing message
 	fmt.Println("Processing..")
 
@@ -62,7 +63,7 @@ func (a *Ad) filesProcess(files []string, adTag string) []string {
 
 }
 
-func (a *Ad) checkDuplicates(allUrls []string) map[string]int {
+func CheckDuplicates(allUrls []string) map[string]int {
 
 	totalUrls := map[string]int{}
 
@@ -80,7 +81,7 @@ func (a *Ad) checkDuplicates(allUrls []string) map[string]int {
 
 }
 
-func (a *Ad) showDuplicates(tagmap map[string]int) {
+func ShowDuplicates(tagmap map[string]int) {
 
 	var (
 		sumTotalDup int
