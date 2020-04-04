@@ -11,7 +11,12 @@ files := []string{
 	"file2.xml",
 }
 
-ad.filesProcess(files, ITEM_CONTAINER_URL_TAG_NAME) //example: <ad> "ad"
+	//process files & get the map[string]int with all the duplicates
+	res := domain.FilesProcess(files, "ad")
+	dups := domain.CheckDuplicates(res)
+
+	//print all duplicates
+	domain.ShowDuplicates(dups)
 
 ``` 
 
