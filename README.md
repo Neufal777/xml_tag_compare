@@ -12,11 +12,11 @@ files := []string{
 }
 
 	//process files & get the map[string]int with all the duplicates
-	res := domain.FilesProcess(files, "ITEM_TAG_NAME")
-	dups := domain.CheckDuplicates(res)
+	res := FilesProcess(files, "ITEM_TAG_NAME")
+	dups := CheckDuplicates(res)
 
 	//print all duplicates
-	domain.ShowDuplicates(dups)
+	ShowDuplicates(dups)
 
 ``` 
 
